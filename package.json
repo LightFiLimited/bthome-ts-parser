@@ -1,0 +1,21 @@
+{
+  "name": "mypackage",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "start": "tsc && ts-node-esm src/index.ts",
+    "build": "tsc --module commonjs",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Anup",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^18.11.18",
+    "typescript": "^4.5.4"
+  }
+}
