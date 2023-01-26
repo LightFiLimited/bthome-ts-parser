@@ -1,3 +1,40 @@
-export function getMessage() {
-  return "hello";
+const btHomeBytes = [
+  { byteId: 18, byteLength: 2 },
+  { byteId: 13, byteLength: 2 },
+  { byteId: 14, byteLength: 2 },
+  { byteId: 3, byteLength: 2 },
+  { byteId: 46, byteLength: 1 },
+  { byteId: 2, byteLength: 2 },
+  { byteId: 69, byteLength: 2 },
+  { byteId: 153, byteLength: 7 },
+  { byteId: 1, byteLength: 1 },
+  { byteId: 9, byteLength: 1 },
+  { byteId: 61, byteLength: 2 },
+  { byteId: 62, byteLength: 4 },
+  { byteId: 67, byteLength: 2 },
+  { byteId: 8, byteLength: 2 },
+  { byteId: 64, byteLength: 2 },
+  { byteId: 65, byteLength: 2 },
+  { byteId: 66, byteLength: 3 },
+  { byteId: 10, byteLength: 3 },
+  { byteId: 5, byteLength: 3 },
+  { byteId: 6, byteLength: 2 },
+  { byteId: 7, byteLength: 2 },
+  { byteId: 20, byteLength: 2 },
+  { byteId: 47, byteLength: 1 },
+  { byteId: 11, byteLength: 3 },
+  { byteId: 4, byteLength: 3 },
+  { byteId: 63, byteLength: 2 },
+  { byteId: 68, byteLength: 2 },
+  { byteId: 19, byteLength: 2 },
+  { byteId: 12, byteLength: 2 },
+  { byteId: 74, byteLength: 2 },
+  { byteId: 71, byteLength: 2 },
+  { byteId: 72, byteLength: 2 },
+  { byteId: 73, byteLength: 2 },
+  { byteId: 70, byteLength: 1 },
+];
+
+export function getMessage(id: number) {
+  return btHomeBytes.find((data) => data.byteId === id);
 }
