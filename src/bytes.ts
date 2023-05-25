@@ -1,4 +1,4 @@
-import { BTHomeData, btHomeBytes, DataType, MetricNames, Unit } from "./util";
+import {BTHomeData, btHomeBytes, DataType, MetricNames, Unit} from "./util";
 
 export function parsePacket(receivedBytes: number[], encryptionKey?: string) {
   const btHomeData: BTHomeData[] = [];
@@ -26,7 +26,11 @@ export function parsePacket(receivedBytes: number[], encryptionKey?: string) {
       macAddressRemovedBytes.splice(0, 7);
     }
 
-    if (macAddressRemovedBytes) {
+    if (
+      macAddressRemovedBytes &&
+      macAddressRemovedBytes[0] !== 66 &&
+      macAddressRemovedBytes[0] !== 64
+    ) {
       const bytes = [...macAddressRemovedBytes];
       for (let i = 0; i < macAddressRemovedBytes.length; i++) {
         if (bytes.length > 0) {
