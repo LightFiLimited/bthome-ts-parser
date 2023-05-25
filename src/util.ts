@@ -1,6 +1,6 @@
 export interface BTHomeData {
   type: MetricNames;
-  value: number;
+  value: number | string;
   unit?: Unit;
 }
 
@@ -54,6 +54,7 @@ export enum MetricNames {
   volumeML = "volumeML",
   volumeFR = "volumeFR",
   UV = "UV",
+  macAddress = "macAddress",
 }
 
 export enum DataType {
@@ -86,6 +87,7 @@ export enum Unit {
   volumeL = "L",
   volumeML = "mL",
   volumeFR = "m³/hr",
+  macAddress = "",
 }
 
 export const btHomeBytes: BtHomeBytesType[] = [
