@@ -37,7 +37,6 @@ export function getByteProperties(
     }
 
     const btHomeBits = reversetBits.slice(5, 8);
-    console.log("Initial bits is", initialBits, btHomeBits, hasEncryption);
 
     if (btHomeBits === "010") bthomeVersion = "v2";
     else bthomeVersion = "v1";
