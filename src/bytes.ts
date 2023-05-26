@@ -1,15 +1,21 @@
-import {BTHomeData, btHomeBytes, DataType, MetricNames, Unit} from "./util";
+import { BTHomeData, btHomeBytes, DataType, MetricNames, Unit } from "./util";
 
-export function parsePacket(receivedBytes: number[], encryptionKey?: string) {
+export function parsePacket(
+  initialBits: string,
+  bthomeVersion: string,
+  receivedBytes: number[],
+  hasEncryption: boolean
+) {
   const btHomeData: BTHomeData[] = [];
   // currently package only supports bytes without encryption key
-  if (!encryptionKey) {
-    const binaryMacInfo = (receivedBytes[0] >>> 0).toString(2);
+  if (!hasEncryption && bthomeVersion === "v2") {
+    let filteredBytes;
     // reverse and find bit character
-    const bitNum = [...binaryMacInfo].reverse().join("").charAt(1);
+    const bitNum = [...initialBits].reverse().join("").charAt(1);
     const macAddressRemovedBytes = [...receivedBytes];
     if (bitNum === "0") {
       macAddressRemovedBytes.splice(0, 1);
+      filteredBytes = macAddressRemovedBytes;
     } else if (bitNum === "1") {
       let macAddress = "";
       for (let j = 1; j < 7; j++) {
@@ -24,15 +30,12 @@ export function parsePacket(receivedBytes: number[], encryptionKey?: string) {
         });
       }
       macAddressRemovedBytes.splice(0, 7);
+      filteredBytes = macAddressRemovedBytes;
     }
 
-    if (
-      macAddressRemovedBytes &&
-      macAddressRemovedBytes[0] !== 66 &&
-      macAddressRemovedBytes[0] !== 64
-    ) {
-      const bytes = [...macAddressRemovedBytes];
-      for (let i = 0; i < macAddressRemovedBytes.length; i++) {
+    if (filteredBytes) {
+      const bytes = [...filteredBytes];
+      for (let i = 0; i < filteredBytes.length; i++) {
         if (bytes.length > 0) {
           const byteId = bytes[0];
           const filteredBtHomeBytes = btHomeBytes.find(
