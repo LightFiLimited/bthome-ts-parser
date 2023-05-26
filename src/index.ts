@@ -13,6 +13,8 @@ function toFixed8Bits(n: number, length: number) {
   return (len > 0 ? new Array(++len).join("0") : "") + n;
 }
 
+// console.log(getByteProperties(energyByte));
+
 export function getByteProperties(
   receivedBytes: number[],
   encryptionKey?: string
@@ -25,17 +27,24 @@ export function getByteProperties(
   let hasEncryption = false;
   let bthomeVersion = "";
   if (initialBits) {
-    if ([...initialBits].reverse().join("").charAt(0) === "1") {
+    const reversetBits = initialBits
+      .split(" ")
+      .map((binary) => binary.split("").reverse().join(""))
+      .join(" ");
+
+    if (reversetBits.charAt(0) === "1") {
       hasEncryption = true;
     }
-    const btHomeBits = initialBits.slice(5, 7);
+
+    const btHomeBits = reversetBits.slice(5, 8);
+    console.log("Initial bits is", initialBits, btHomeBits, hasEncryption);
+
     if (btHomeBits === "010") bthomeVersion = "v2";
     else bthomeVersion = "v1";
   }
 
   const btHomePacket: BTHomePacket = {
     version: bthomeVersion,
-    encryption: encryptionKey ? true : false,
     data: parsePacket(initialBits, bthomeVersion, receivedBytes, hasEncryption),
   };
   return btHomePacket;

@@ -6,7 +6,6 @@ export interface BTHomeData {
 
 export interface BTHomePacket {
   version: string;
-  encryption: boolean;
   data: BTHomeData[];
 }
 
