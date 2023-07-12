@@ -5,7 +5,7 @@ import { BTHomePacket } from "./util";
 const testByte = [1, 100, 2, 52, 7, 46, 63, 18, 112, 5];
 const energyByte = [66, 247, 216, 51, 77, 10, 255, 1, 90, 10, 169, 247, 24];
 const macTestByte = [
-  66, 128, 132, 112, 11, 218, 215, 1, 100, 2, 53, 8, 46, 63, 18, 250, 7,
+  66, 128, 132, 112, 11, 218, 215, 1, 100, 2, 2, 10, 46, 44, 18, 19, 2,
 ];
 
 function toFixed8Bits(n: number, length: number) {

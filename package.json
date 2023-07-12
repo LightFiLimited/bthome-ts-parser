@@ -1,6 +1,10 @@
 {
   "name": "lf-bthome-bytes",
+<<<<<<< Updated upstream
   "version": "1.0.9",
+=======
+  "version": "1.0.10",
+>>>>>>> Stashed changes
   "description": "",
   "main": "src/index.ts",
   "files": [

@@ -20,7 +20,7 @@ export function parsePacket(
       let macAddress = "";
       for (let j = 1; j < 7; j++) {
         const hexValue = receivedBytes[j].toString(16).padStart(2, "0");
-        macAddress = macAddress + hexValue.toUpperCase();
+        macAddress = hexValue.toUpperCase() + macAddress;
       }
       if (macAddress) {
         btHomeData.push({
