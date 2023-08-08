@@ -1,4 +1,4 @@
-import { BTHomeData, btHomeBytes, DataType, MetricNames, Unit } from "./util";
+import { BTHomeData, btHomeBytes, DataType, VarName, Unit } from "./util";
 
 export function parsePacket(
   initialBits: string,
@@ -24,7 +24,7 @@ export function parsePacket(
       }
       if (macAddress) {
         btHomeData.push({
-          type: MetricNames.macAddress,
+          type: VarName.macAddress,
           value: macAddress,
           unit: Unit.macAddress,
         });
@@ -51,7 +51,7 @@ export function parsePacket(
             }
             if (value !== undefined) {
               btHomeData.push({
-                type: filteredBtHomeBytes.metricType,
+                type: filteredBtHomeBytes.varName,
                 value: value * filteredBtHomeBytes.factor,
                 unit: filteredBtHomeBytes.unit,
               });

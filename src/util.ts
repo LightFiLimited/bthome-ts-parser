@@ -1,5 +1,5 @@
 export interface BTHomeData {
-  type: MetricNames;
+  type: VarName;
   value: number | string;
   unit?: Unit;
 }
@@ -12,13 +12,13 @@ export interface BTHomePacket {
 export interface BtHomeBytesType {
   byteId: number;
   byteLength: number;
-  metricType: MetricNames;
+  varName: VarName;
   factor: number;
   dataType: DataType;
   unit?: Unit;
 }
 
-export enum MetricNames {
+export enum VarName {
   co2ppm = "CO2ppm",
   particulateMatter = "particulateMatter",
   particulateMatter10 = "particulateMatter10",
@@ -93,7 +93,7 @@ export const btHomeBytes: BtHomeBytesType[] = [
   {
     byteId: 1,
     byteLength: 1,
-    metricType: MetricNames.batteryLevel,
+    varName: VarName.batteryLevel,
     factor: 1,
     dataType: DataType.uint,
     unit: Unit.batteryLevel,
@@ -101,7 +101,7 @@ export const btHomeBytes: BtHomeBytesType[] = [
   {
     byteId: 2,
     byteLength: 2,
-    metricType: MetricNames.temperatureC,
+    varName: VarName.temperatureC,
     factor: 0.01,
     dataType: DataType.sint,
     unit: Unit.temperature,
@@ -109,7 +109,7 @@ export const btHomeBytes: BtHomeBytesType[] = [
   {
     byteId: 3,
     byteLength: 2,
-    metricType: MetricNames.relativeHumidity,
+    varName: VarName.relativeHumidity,
     factor: 0.01,
     dataType: DataType.uint,
     unit: Unit.humidity,
@@ -117,7 +117,7 @@ export const btHomeBytes: BtHomeBytesType[] = [
   {
     byteId: 4,
     byteLength: 3,
-    metricType: MetricNames.pressure,
+    varName: VarName.pressure,
     factor: 0.01,
     dataType: DataType.uint,
     unit: Unit.pressure,
@@ -125,7 +125,7 @@ export const btHomeBytes: BtHomeBytesType[] = [
   {
     byteId: 5,
     byteLength: 3,
-    metricType: MetricNames.illuminance,
+    varName: VarName.illuminance,
     factor: 0.01,
     dataType: DataType.uint,
     unit: Unit.illuminance,
@@ -133,7 +133,7 @@ export const btHomeBytes: BtHomeBytesType[] = [
   {
     byteId: 6,
     byteLength: 2,
-    metricType: MetricNames.massKG,
+    varName: VarName.massKG,
     factor: 0.01,
     dataType: DataType.uint,
     unit: Unit.massKG,
@@ -141,7 +141,7 @@ export const btHomeBytes: BtHomeBytesType[] = [
   {
     byteId: 7,
     byteLength: 2,
-    metricType: MetricNames.massLB,
+    varName: VarName.massLB,
     factor: 0.01,
     dataType: DataType.uint,
     unit: Unit.illuminance,
@@ -149,7 +149,7 @@ export const btHomeBytes: BtHomeBytesType[] = [
   {
     byteId: 8,
     byteLength: 2,
-    metricType: MetricNames.dewpoint,
+    varName: VarName.dewpoint,
     factor: 0.01,
     dataType: DataType.sint,
     unit: Unit.dewpoint,
@@ -157,14 +157,14 @@ export const btHomeBytes: BtHomeBytesType[] = [
   {
     byteId: 9,
     byteLength: 1,
-    metricType: MetricNames.count,
+    varName: VarName.count,
     factor: 1,
     dataType: DataType.uint,
   },
   {
     byteId: 10,
     byteLength: 3,
-    metricType: MetricNames.energy,
+    varName: VarName.energy,
     factor: 0.001,
     dataType: DataType.uint,
     unit: Unit.energy,
@@ -172,7 +172,7 @@ export const btHomeBytes: BtHomeBytesType[] = [
   {
     byteId: 11,
     byteLength: 3,
-    metricType: MetricNames.power,
+    varName: VarName.power,
     factor: 0.01,
     dataType: DataType.uint,
     unit: Unit.power,
@@ -180,7 +180,7 @@ export const btHomeBytes: BtHomeBytesType[] = [
   {
     byteId: 12,
     byteLength: 2,
-    metricType: MetricNames.voltage,
+    varName: VarName.voltage,
     factor: 0.001,
     dataType: DataType.uint,
     unit: Unit.voltage,
@@ -188,7 +188,7 @@ export const btHomeBytes: BtHomeBytesType[] = [
   {
     byteId: 13,
     byteLength: 2,
-    metricType: MetricNames.particulateMatter,
+    varName: VarName.particulateMatter,
     factor: 1,
     dataType: DataType.uint,
     unit: Unit.particulateMatter,
@@ -196,7 +196,7 @@ export const btHomeBytes: BtHomeBytesType[] = [
   {
     byteId: 14,
     byteLength: 2,
-    metricType: MetricNames.particulateMatter10,
+    varName: VarName.particulateMatter10,
     factor: 1,
     dataType: DataType.uint,
     unit: Unit.particulateMatter,
@@ -204,7 +204,7 @@ export const btHomeBytes: BtHomeBytesType[] = [
   {
     byteId: 18,
     byteLength: 2,
-    metricType: MetricNames.co2ppm,
+    varName: VarName.co2ppm,
     factor: 1,
     dataType: DataType.uint,
     unit: Unit.co2ppm,
@@ -212,7 +212,7 @@ export const btHomeBytes: BtHomeBytesType[] = [
   {
     byteId: 19,
     byteLength: 2,
-    metricType: MetricNames.tvoc,
+    varName: VarName.tvoc,
     factor: 1,
     dataType: DataType.uint,
     unit: Unit.tvoc,
@@ -220,7 +220,7 @@ export const btHomeBytes: BtHomeBytesType[] = [
   {
     byteId: 20,
     byteLength: 2,
-    metricType: MetricNames.moisture,
+    varName: VarName.moisture,
     factor: 0.01,
     dataType: DataType.uint,
     unit: Unit.moisture,
@@ -229,7 +229,7 @@ export const btHomeBytes: BtHomeBytesType[] = [
   {
     byteId: 46,
     byteLength: 1,
-    metricType: MetricNames.relativeHumidity2,
+    varName: VarName.relativeHumidity2,
     factor: 1,
     dataType: DataType.uint,
     unit: Unit.humidity,
@@ -238,7 +238,7 @@ export const btHomeBytes: BtHomeBytesType[] = [
   {
     byteId: 47,
     byteLength: 1,
-    metricType: MetricNames.moisture2,
+    varName: VarName.moisture2,
     factor: 1,
     dataType: DataType.uint,
     unit: Unit.moisture,
@@ -246,21 +246,21 @@ export const btHomeBytes: BtHomeBytesType[] = [
   {
     byteId: 61,
     byteLength: 2,
-    metricType: MetricNames.count2,
+    varName: VarName.count2,
     factor: 1,
     dataType: DataType.uint,
   },
   {
     byteId: 62,
     byteLength: 4,
-    metricType: MetricNames.count3,
+    varName: VarName.count3,
     factor: 1,
     dataType: DataType.uint,
   },
   {
     byteId: 63,
     byteLength: 2,
-    metricType: MetricNames.rotation,
+    varName: VarName.rotation,
     factor: 0.1,
     dataType: DataType.sint,
     unit: Unit.rotation,
@@ -268,7 +268,7 @@ export const btHomeBytes: BtHomeBytesType[] = [
   {
     byteId: 64,
     byteLength: 2,
-    metricType: MetricNames.distanceMM,
+    varName: VarName.distanceMM,
     factor: 1,
     dataType: DataType.uint,
     unit: Unit.distanceMM,
@@ -277,7 +277,7 @@ export const btHomeBytes: BtHomeBytesType[] = [
   {
     byteId: 65,
     byteLength: 2,
-    metricType: MetricNames.distanceM,
+    varName: VarName.distanceM,
     factor: 0.1,
     dataType: DataType.uint,
     unit: Unit.distanceM,
@@ -285,7 +285,7 @@ export const btHomeBytes: BtHomeBytesType[] = [
   {
     byteId: 66,
     byteLength: 3,
-    metricType: MetricNames.duration,
+    varName: VarName.duration,
     factor: 0.001,
     dataType: DataType.uint,
     unit: Unit.duration,
@@ -293,7 +293,7 @@ export const btHomeBytes: BtHomeBytesType[] = [
   {
     byteId: 67,
     byteLength: 2,
-    metricType: MetricNames.current,
+    varName: VarName.current,
     factor: 0.001,
     dataType: DataType.uint,
     unit: Unit.current,
@@ -301,7 +301,7 @@ export const btHomeBytes: BtHomeBytesType[] = [
   {
     byteId: 68,
     byteLength: 2,
-    metricType: MetricNames.speed,
+    varName: VarName.speed,
     factor: 0.01,
     dataType: DataType.uint,
     unit: Unit.speed,
@@ -310,7 +310,7 @@ export const btHomeBytes: BtHomeBytesType[] = [
   {
     byteId: 69,
     byteLength: 2,
-    metricType: MetricNames.temperatureC2,
+    varName: VarName.temperatureC2,
     factor: 0.1,
     dataType: DataType.sint,
     unit: Unit.temperature,
@@ -318,14 +318,14 @@ export const btHomeBytes: BtHomeBytesType[] = [
   {
     byteId: 70,
     byteLength: 1,
-    metricType: MetricNames.UV,
+    varName: VarName.UV,
     factor: 1,
     dataType: DataType.uint,
   },
   {
     byteId: 71,
     byteLength: 2,
-    metricType: MetricNames.volumeL,
+    varName: VarName.volumeL,
     factor: 0.1,
     dataType: DataType.uint,
     unit: Unit.volumeL,
@@ -333,7 +333,7 @@ export const btHomeBytes: BtHomeBytesType[] = [
   {
     byteId: 72,
     byteLength: 2,
-    metricType: MetricNames.volumeML,
+    varName: VarName.volumeML,
     factor: 1,
     dataType: DataType.uint,
     unit: Unit.volumeML,
@@ -341,7 +341,7 @@ export const btHomeBytes: BtHomeBytesType[] = [
   {
     byteId: 73,
     byteLength: 2,
-    metricType: MetricNames.volumeFR,
+    varName: VarName.volumeFR,
     factor: 0.001,
     dataType: DataType.uint,
     unit: Unit.volumeFR,
@@ -349,7 +349,7 @@ export const btHomeBytes: BtHomeBytesType[] = [
   {
     byteId: 74,
     byteLength: 2,
-    metricType: MetricNames.voltage2,
+    varName: VarName.voltage2,
     factor: 0.1,
     dataType: DataType.uint,
     unit: Unit.voltage,
