@@ -1,14 +1,13 @@
-import { BTHomeData, btHomeBytes, DataType, VarName, Unit } from "./util";
+import { BTHomeData, btHomeBytes, VarName, Unit } from "./util";
 
 export function parsePacket(
   initialBits: string,
-  bthomeVersion: string,
   receivedBytes: number[],
   hasEncryption: boolean
 ) {
   const btHomeData: BTHomeData[] = [];
   // currently package only supports bytes without encryption key
-  if (!hasEncryption && bthomeVersion === "v2") {
+  if (!hasEncryption) {
     let filteredBytes;
     // reverse and find bit character
     const bitNum = [...initialBits].reverse().join("").charAt(1);
@@ -24,9 +23,9 @@ export function parsePacket(
       }
       if (macAddress) {
         btHomeData.push({
-          type: VarName.macAddress,
+          varName: VarName.macAddress,
           value: macAddress,
-          unit: Unit.macAddress,
+          extension: Unit.macAddress,
         });
       }
       macAddressRemovedBytes.splice(0, 7);
@@ -50,10 +49,13 @@ export function parsePacket(
               //   }
             }
             if (value !== undefined) {
+              const dataValue = value * filteredBtHomeBytes.factor;
               btHomeData.push({
-                type: filteredBtHomeBytes.varName,
-                value: value * filteredBtHomeBytes.factor,
-                unit: filteredBtHomeBytes.unit,
+                varName: filteredBtHomeBytes.varName,
+                value: filteredBtHomeBytes.fixedPoint
+                  ? dataValue.toFixed(filteredBtHomeBytes.fixedPoint)
+                  : dataValue,
+                extension: filteredBtHomeBytes.unit,
               });
             }
             bytes.splice(0, filteredBtHomeBytes.byteLength + 1);

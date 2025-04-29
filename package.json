@@ -1,6 +1,6 @@
 {
   "name": "lf-bthome-bytes",
-  "version": "1.0.11",
+  "version": "2.0.1",
   "description": "",
   "main": "src/index.ts",
   "files": [
@@ -10,13 +10,19 @@
   "scripts": {
     "start": "tsc && ts-node-esm src/index.ts",
     "build": "npx tsc",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "author": "Anup",
   "license": "ISC",
   "devDependencies": {
+    "@babel/core": "^7.26.10",
+    "@babel/preset-env": "^7.26.9",
+    "@types/jest": "^29.5.14",
     "@types/node": "^18.11.18",
+    "babel-jest": "^29.7.0",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.3.2",
     "ts-node": "^10.9.1",
-    "typescript": "^4.5.4"
+    "typescript": "^4.9.5"
   }
 }

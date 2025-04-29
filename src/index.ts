@@ -1,5 +1,5 @@
 import { parsePacket } from "./bytes";
-import { BTHomePacket } from "./util";
+import { BTHomePacket, BTHomeVersion } from "./util";
 
 // const testByte = [1, 100, 2, 193, 7, 3, 254, 14, 18, 221, 1];
 const testByte = [1, 100, 2, 52, 7, 46, 63, 18, 112, 5];
@@ -7,6 +7,7 @@ const energyByte = [66, 247, 216, 51, 77, 10, 255, 1, 90, 10, 169, 247, 24];
 const macTestByte = [
   66, 128, 132, 112, 11, 218, 215, 1, 100, 2, 2, 10, 46, 44, 18, 19, 2,
 ];
+const pmTestByte = [66, 79, 36, 34, 70, 134, 228, 0, 202, 13, 0, 0, 18, 204, 3];
 
 function toFixed8Bits(n: number, length: number) {
   var len = length - ("" + n).length;
@@ -38,13 +39,16 @@ export function getByteProperties(
 
     const btHomeBits = reversetBits.slice(5, 8);
 
-    if (btHomeBits === "010") bthomeVersion = "v2";
-    else bthomeVersion = "v1";
+    if (btHomeBits === "010") bthomeVersion = BTHomeVersion.v2;
+    else bthomeVersion = BTHomeVersion.v1;
   }
 
   const btHomePacket: BTHomePacket = {
     version: bthomeVersion,
-    data: parsePacket(initialBits, bthomeVersion, receivedBytes, hasEncryption),
+    data:
+      bthomeVersion === BTHomeVersion.v2
+        ? parsePacket(initialBits, receivedBytes, hasEncryption)
+        : [],
   };
   return btHomePacket;
 }
