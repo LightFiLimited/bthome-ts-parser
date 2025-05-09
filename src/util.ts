@@ -308,6 +308,7 @@ export const btHomeBytes: BtHomeBytesType[] = [
     factor: 0.01,
     dataType: DataType.uint,
     unit: Unit.relativeHumidity,
+    fixedPoint: 2,
   },
 
   {
