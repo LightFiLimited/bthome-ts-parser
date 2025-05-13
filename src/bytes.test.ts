@@ -6,7 +6,7 @@ test("parses temp, hum and battery bytes", () => {
   const byteArray = Array.from(dataString).map((char) => char.charCodeAt(0));
   const expectedData = [
     { extension: "%", value: 93, varName: "battery" },
-    { extension: "°C", value: "24.0", varName: "temperatureC" },
+    { extension: "°C", value: 24.0, varName: "temperatureC" },
     { extension: "%", value: 63.27, varName: "relativeHumidity" },
   ];
   expect(getByteProperties(byteArray).data).toStrictEqual(expectedData);
@@ -44,8 +44,8 @@ test("Test BTHome parser for temperature humidity reading without encryption.", 
   const dataString = "\x40\x02\xca\x09\x03\xbf\x13";
   const byteArray = Array.from(dataString).map((char) => char.charCodeAt(0));
   const expectedData = [
-    { extension: "°C", value: "25.1", varName: "temperatureC" },
-    { extension: "%", value: 50.550000000000004, varName: "relativeHumidity" },
+    { extension: "°C", value: 25.1, varName: "temperatureC" },
+    { extension: "%", value: 50.55, varName: "relativeHumidity" },
   ];
   expect(getByteProperties(byteArray).data).toEqual(expectedData);
 });
@@ -55,7 +55,7 @@ test("Test BTHome parser for temperature humidity battery reading", () => {
   const byteArray = Array.from(dataString).map((char) => char.charCodeAt(0));
   const expectedData = [
     { extension: "%", value: 93, varName: "battery" },
-    { extension: "°C", value: "24.0", varName: "temperatureC" },
+    { extension: "°C", value: 24, varName: "temperatureC" },
     { extension: "%", value: 63.27, varName: "relativeHumidity" },
   ];
   expect(getByteProperties(byteArray).data).toEqual(expectedData);
@@ -111,7 +111,7 @@ test("Test BTHome parser for energy reading without encryption.", () => {
   const dataString = "\x40\x0a\x13\x8a\x14";
   const byteArray = Array.from(dataString).map((char) => char.charCodeAt(0));
   const expectedData = [
-    { extension: "kWh", value: "40.467", varName: "energyInkWh" },
+    { extension: "kWh", value: 40.467, varName: "energyInkWh" },
   ];
   expect(getByteProperties(byteArray).data).toEqual(expectedData);
 });
@@ -167,8 +167,8 @@ test("Test BTHome parser for double temperature reading without encryption.", ()
   const dataString = "\x40\x02\xca\x09\x02\xcf\x09";
   const byteArray = Array.from(dataString).map((char) => char.charCodeAt(0));
   const expectedData = [
-    { extension: "°C", value: "25.1", varName: "temperatureC" },
-    { extension: "°C", value: "25.1", varName: "temperatureC" },
+    { extension: "°C", value: 25.1, varName: "temperatureC" },
+    { extension: "°C", value: 25.1, varName: "temperatureC" },
   ];
   expect(getByteProperties(byteArray).data).toEqual(expectedData);
 });
@@ -178,9 +178,9 @@ test("Test BTHome parser for triple temperature, double humidity and single batt
     "\x40\x02\xca\x09\x02\xcf\x09\x02\xcf\x08\x03\xb7\x18\x03\xb7\x17\x01\x5d";
   const byteArray = Array.from(dataString).map((char) => char.charCodeAt(0));
   const expectedData = [
-    { extension: "°C", value: "25.1", varName: "temperatureC" },
-    { extension: "°C", value: "25.1", varName: "temperatureC" },
-    { extension: "°C", value: "22.6", varName: "temperatureC" },
+    { extension: "°C", value: 25.1, varName: "temperatureC" },
+    { extension: "°C", value: 25.1, varName: "temperatureC" },
+    { extension: "°C", value: 22.6, varName: "temperatureC" },
     { extension: "%", value: 63.27, varName: "relativeHumidity" },
     { extension: "%", value: 60.71, varName: "relativeHumidity" },
     { extension: "%", value: 93, varName: "battery" },

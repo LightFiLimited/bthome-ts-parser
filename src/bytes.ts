@@ -53,7 +53,7 @@ export function parsePacket(
               btHomeData.push({
                 varName: filteredBtHomeBytes.varName,
                 value: filteredBtHomeBytes.fixedPoint
-                  ? dataValue.toFixed(filteredBtHomeBytes.fixedPoint)
+                  ? Number(dataValue.toFixed(filteredBtHomeBytes.fixedPoint))
                   : dataValue,
                 extension: filteredBtHomeBytes.unit,
               });
