@@ -1,9 +1,9 @@
-import { BTHomeData, btHomeBytes, VarName, Unit } from "./util";
+import { BTHomeData, btHomeBytes, VarName, Unit, DataType } from "./util";
 
 export function parsePacket(
   initialBits: string,
   receivedBytes: number[],
-  hasEncryption: boolean
+  hasEncryption: boolean,
 ) {
   const btHomeData: BTHomeData[] = [];
   // currently package only supports bytes without encryption key
@@ -38,7 +38,7 @@ export function parsePacket(
         if (bytes.length > 0) {
           const byteId = bytes[0];
           const filteredBtHomeBytes = btHomeBytes.find(
-            (byte) => byte.byteId === byteId
+            (byte) => byte.byteId === byteId,
           );
           if (filteredBtHomeBytes) {
             let value: number | undefined;
@@ -49,6 +49,16 @@ export function parsePacket(
               //   }
             }
             if (value !== undefined) {
+              // Allow negative readings, Only apply signed conversion for sint types
+              if (filteredBtHomeBytes.dataType === DataType.sint) {
+                const maxUnsigned = Math.pow(
+                  2,
+                  filteredBtHomeBytes.byteLength * 8,
+                );
+                if (value >= maxUnsigned / 2) {
+                  value = value - maxUnsigned;
+                }
+              }
               const dataValue = value * filteredBtHomeBytes.factor;
               btHomeData.push({
                 varName: filteredBtHomeBytes.varName,
