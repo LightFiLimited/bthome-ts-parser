@@ -1,6 +1,6 @@
 {
   "name": "bthome-ts-parser",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "description": "parses bthome packet returning value data",
   "main": "src/index.ts",
   "files": [
